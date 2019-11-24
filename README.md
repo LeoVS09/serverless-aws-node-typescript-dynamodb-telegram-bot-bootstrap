@@ -5,6 +5,7 @@ Contains:
 * node enviroment setup 
 * typescript setup 
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
+* Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 
 ## Fast setup | Servless from scratch tutorial
 Just dogo step by step and you will deploy you function to AWS
@@ -64,4 +65,48 @@ make deploy
 Login to serverless
 ```bash
 make login
+```
+
+## Serverless tips
+
+You can deploy faster by update only codee and dependencies of individual function
+```bash
+make deploy-fn
+```
+
+Get logs of deployed function
+```bash
+make logs
+```
+
+Invoke function in cloud and print their log
+```bash
+make invoke
+```
+
+Invoke function locally and print logs
+```bash
+make local
+```
+
+## Enviroment variables
+You can setup you enviroment variables by set them in serverless.yml file
+```yml
+    enviroment:
+      SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
+      STAGE: ${self:provider.stage}
+```
+where ${env:<NAME>} local enviroment variables which must be passed
+*you can define them in AWS cloud*
+
+For local development we must paste them in KEY:VALUES pairs
+```bash
+serverless invoke local --function=hello --log -e SECRET_FUNCTION_TOKEN=VALUE OTHER_ENVIROMENT_VARIBLE=ANOTHER_VALUE
+```
+
+For setup it from file we maked `dev.env` file which will be readed by make command `read-local-enviroment`
+
+So you can just run it by
+```bash
+make local
 ```
