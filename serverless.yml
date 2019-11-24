@@ -16,6 +16,7 @@ plugins:
 
 provider:
   name: aws
+  stage: ${opt:stage, 'dev'}
   runtime: nodejs12.x
   apiGateway:
     minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
@@ -29,3 +30,6 @@ functions:
       - http:
           method: get
           path: hello
+    enviroment:
+      SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
+      STAGE: ${self:provider.stage}
