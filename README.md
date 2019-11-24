@@ -1,6 +1,18 @@
 # serverless-aws-node-bootstrap
 Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration
 
+Contains:
+* node enviroment setup 
+* typescript setup 
+* webpack serverless setup - to compile typescript and pack for deploy node_modules 
+
+## Setup local enviroment
+This command will generate configuration enviroment `.env` file which will be used by docker and serveless
+
+```bash
+make setup
+```
+
 ## In docker isolated linux development
 This bootstrap allow (but not require) develop all code inside docker container
 
@@ -17,4 +29,18 @@ make console
 Rebuild local docker image
 ```bash
 make docker-build
+```
+
+## Deploy you serverless functions
+Commands to deploy you function
+
+>Note login to serverless when deploy first time
+Deploy to aws cloud by serverless 
+```bash
+make deploy
+```
+
+Login to serverless
+```bash
+make login
 ```

@@ -1,0 +1,5 @@
+# Secreats and enviroment
+.env
+
+# Packages
+node_modules

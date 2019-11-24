@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-.PHONY: docker-console console start setup docker-build
+.PHONY: docker-console console start setup docker-build deploy login
 
 export NODE_ENV=development
 
@@ -11,6 +11,13 @@ DOCKER_IMAGE_VERSION=dev-enviroment
 DOCKER_IMAGE_TAG=serverless-aws-node:$(DOCKER_IMAGE_VERSION)
 
 # ---------------------------------------------------------------------------------------------------------------------
+# SETUP
+# ---------------------------------------------------------------------------------------------------------------------
+
+setup:
+	./bin/setup.sh
+
+# ---------------------------------------------------------------------------------------------------------------------
 # DOCKER
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +25,16 @@ docker-build:
 	@docker build -t $(DOCKER_IMAGE_TAG) .
 
 docker-console:
-	docker-compose run --rm --publish=8080:8080 dev-enviroment /bin/sh
+	docker-compose run --rm --publish=8080:8080 dev-enviroment /bin/bash
 
 console: docker-console
+
+# ---------------------------------------------------------------------------------------------------------------------
+# SERVERLESS
+# ---------------------------------------------------------------------------------------------------------------------
+
+deploy: 
+	serverless deploy
+
+login: 
+	serverless login

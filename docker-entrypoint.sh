@@ -2,6 +2,8 @@
 
 IP_ADDRESSES=($(hostname -i))
 
+echo "================================================="
+
 for IP_ADDRESS in "${IP_ADDRESSES[@]}"; do
   printf "IP: \t%s\n" $IP_ADDRESS
 done
@@ -9,5 +11,9 @@ done
 printf "node: \t%s\n"   $(node --version)
 printf "npm:  \t%s\n"   $(npm --version)
 printf "yarn: \t%s\n"   $(yarn --version)
+
+echo "Docker entrypoint completed."
+
+echo "================================================="
 
 exec "$@"
