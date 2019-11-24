@@ -1,0 +1,26 @@
+{
+  "name": "serverless-aws-node-bootstrap",
+  "version": "0.1.0",
+  "description": "Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoVS09/serverless-aws-node-bootstrap.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "serverless",
+    "node",
+    "bootstrap"
+  ],
+  "author": "LeoVS09",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoVS09/serverless-aws-node-bootstrap/issues"
+  },
+  "homepage": "https://github.com/LeoVS09/serverless-aws-node-bootstrap#readme"
+}
