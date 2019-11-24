@@ -6,6 +6,27 @@ Contains:
 * typescript setup 
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
 
+## Fast setup | Servless from scratch tutorial
+Just dogo step by step and you will deploy you function to AWS
+
+```bash
+git clone https://github.com/LeoVS09/serverless-aws-node-bootstrap.git
+cd ./serverless-aws-node-bootstrap
+
+# Genereta enviroment template
+make setup
+# Write you secrets to '.env' file
+
+# Then start docker container with installed dependencies
+make console
+
+# Write you project name, app, org into serverless.yml
+# app and org you can find into you dashboard.serverless.com
+
+# Then deploy you function to AWS
+make deploy
+```
+
 ## Setup local enviroment
 This command will generate configuration enviroment `.env` file which will be used by docker and serveless
 
