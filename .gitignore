@@ -12,6 +12,9 @@ jspm_packages
 # Webpack directories
 .webpack
 
-#Environment variables
+# Environment variables
 .env
 dev.env
+
+# Secrets files
+secrets.*.yml

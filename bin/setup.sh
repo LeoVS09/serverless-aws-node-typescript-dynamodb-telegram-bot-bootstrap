@@ -20,7 +20,7 @@ echo "Configuration written to .env"
 # To source our .env file from the shell it has to be executable.
 chmod +rw .env
 
-echo "Generate serverless local development enviroment '.env.dev' file"
+echo "Generate serverless local development enviroment '.env.dev' file..."
 
 cat >> .env.dev <<CONFIG
 SECRET_FUNCTION_TOKEN="This token will be used when you start you application locally"
@@ -29,3 +29,12 @@ CONFIG
 chmod +rw .env
 
 echo "Local development enviroment file '.env.dev' was writed"
+
+echo "Generate dev stage secrets 'secrets.dev.yml' file..."
+
+cat >> secrets.dev.yml <<CONFIG
+SECRET_SERVICE_KEY: SOME_SECRET_KEY
+CONFIG
+
+chmod +rw secrets.dev.yml
+echo "Secrets 'secrets.dev.yml' file generated"
