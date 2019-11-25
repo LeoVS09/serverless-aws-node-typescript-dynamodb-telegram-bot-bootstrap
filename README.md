@@ -1,4 +1,4 @@
-# serverless-aws-node-bootstrap
+# Serverless AWS Node Bootstrap
 Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration
 
 Contains:
