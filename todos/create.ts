@@ -4,29 +4,33 @@ import { DynamoDB } from 'aws-sdk'
 
 const dynamoDb = new DynamoDB.DocumentClient()
 
-export const create: APIGatewayProxyHandler = async (event, _context) => {
-  const timestamp = new Date().getTime()
-  const data = JSON.parse(event.body)
+const tableName = process.env.DYNAMODB_TABLE
 
-  if (typeof data.text !== 'string') {
+export const create: APIGatewayProxyHandler = async (event, _context) => {
+    console.log('using table', tableName)
+    
+    const timestamp = new Date().getTime()
+    const data = JSON.parse(event.body)
+
+    if (typeof data.text !== 'string') {
     console.error('Validation Failed')
     throw new Error('Couldn\'t create the todo item.')
     return
-  }
+    }
 
-  await createInDynamoDB(data, timestamp)
+    await createInDynamoDB(data, timestamp)
 
-  const todos = await list()
+    const todos = await list()
 
-  return {
-      statusCode: 200,
-      body: JSON.stringify(todos, null, 2)
-  }
+    return {
+        statusCode: 200,
+        body: JSON.stringify(todos, null, 2)
+    }
 }
 
 const createInDynamoDB = (data: any, timestamp: number) => {
     const params = {
-        TableName: process.env.DYNAMODB_TABLE,
+        TableName: tableName,
         Item: {
           id: uuid.v1(),
           text: data.text,
@@ -54,7 +58,7 @@ const createInDynamoDB = (data: any, timestamp: number) => {
 
 const list = () => {
     const params = {
-        TableName: process.env.DYNAMODB_TABLE,
+        TableName: tableName,
     };
 
     return new Promise((resolve, reject) => {

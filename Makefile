@@ -47,26 +47,26 @@ login:
 # Redeploy only the code + dependencies to update the AWS lambda function
 # Faster then full deploy
 deploy-fn:
-	sls deploy function -f hello
+	sls deploy function -f create
 
-# View logs of hello function and tail via -t flag
+# View logs of create function and tail via -t flag
 logs:
-	serverless logs -f hello -t
+	serverless logs -f create -t
 
 # ----------------------------------------------------- INVOKE ---------------------------------------------------------
 
 # Invoke the Lambda directly and print log statements via
 invoke:
-	serverless invoke --function=hello --log
+	serverless invoke --function=create --log
 
 # Invoke functioon localy
 # Unforrtunately  we cannot push  all enviroment variables to function only by key=value pairs after '-e' paramet
 local:
-	serverless invoke local --function=hello --log
+	serverless invoke local --function=create --log
 
 # Unforrtunately  we cannot push  all enviroment variables to function only by key=value pairs after '-e' paramet
 local-env:
-	. ./dev.env && serverless invoke local --function=hello --log -e SECRET_FUNCTION_TOKEN="$$SECRET_FUNCTION_TOKEN"
+	. ./dev.env && serverless invoke local --function=create --log -e SECRET_FUNCTION_TOKEN="$$SECRET_FUNCTION_TOKEN"
 
 # --------------------------------------------------- ENCRIPTION ---------------------------------------------------------
 
