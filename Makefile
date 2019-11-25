@@ -1,12 +1,13 @@
 #!/usr/bin/env make
 
-.PHONY: docker-console console start setup docker-build deploy deploy-fn logs invoke login local read-local-enviroment
+.PHONY: docker-console console start setup docker-build deploy deploy-fn logs invoke login local read-local-enviroment encript-dev decript-dev encript-prod decript-prod
 
 export NODE_ENV=development
 
 # ---------------------------------------------------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------------------------------------------------
+
 DOCKER_IMAGE_VERSION=dev-enviroment
 DOCKER_IMAGE_TAG=serverless-aws-node:$(DOCKER_IMAGE_VERSION)
 
@@ -52,6 +53,8 @@ deploy-fn:
 logs:
 	serverless logs -f hello -t
 
+# ----------------------------------------------------- INVOKE ---------------------------------------------------------
+
 # Invoke the Lambda directly and print log statements via
 invoke:
 	serverless invoke --function=hello --log
@@ -59,8 +62,28 @@ invoke:
 # Invoke functioon localy
 # Unforrtunately  we cannot push  all enviroment variables to function only by key=value pairs after '-e' paramet
 local:
-	serverless invoke local --function=hello --log -e SECRET_FUNCTION_TOKEN=$(SECRET_FUNCTION_TOKEN)
+	serverless invoke local --function=hello --log
 
 # Unforrtunately  we cannot push  all enviroment variables to function only by key=value pairs after '-e' paramet
 local-env:
 	. ./dev.env && serverless invoke local --function=hello --log -e SECRET_FUNCTION_TOKEN="$$SECRET_FUNCTION_TOKEN"
+
+# --------------------------------------------------- ENCRIPTION ---------------------------------------------------------
+
+# run command like that `make PASSWORD=123 encript-dev`
+
+# Encript dev stage secret file with given password
+encript-dev:
+	serverless encrypt --stage dev --password ${PASSWORD}
+
+# Decript prod stage secrets file with given password
+decript-dev:
+	serverless decrypt --stage dev --password ${PASSWORD}
+
+# Encript prod stage secret file with given password
+encript-prod:
+	serverless encrypt --stage prod --password ${PASSWORD}
+
+# Decript prod stage secrets file with given password
+decript-prod:
+	serverless decrypt --stage prod --password ${PASSWORD}
