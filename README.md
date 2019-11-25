@@ -1,4 +1,4 @@
-# Serverless AWS Node Bootstrap
+# Serverless AWS Node DynamoDB Bootstrap
 Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration
 
 Contains:
@@ -7,6 +7,7 @@ Contains:
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
 * Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 * Encripted file variables - setup for store variables in encripted file 
+* DynamoDB - setup for star work with dynamodb
 
 ## Servless from scratch tutorial
 

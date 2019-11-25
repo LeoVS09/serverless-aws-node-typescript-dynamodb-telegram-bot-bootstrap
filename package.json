@@ -1,7 +1,7 @@
 {
-  "name": "serverless-aws-node-bootstrap",
+  "name": "serverless-aws-node-dynamodb",
   "version": "0.1.0",
-  "description": "Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration",
+  "description": "Base setup of enviroment and tools to start develop on lambda functions with DynamoDB from zero (minimal) configuration",
   "main": "handler.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,26 +9,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LeoVS09/serverless-aws-node-bootstrap.git"
+    "url": "git+https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb.git"
   },
   "keywords": [
     "aws",
     "lambda",
     "serverless",
     "node",
-    "bootstrap"
+    "bootstrap",
+    "dynamodb"
   ],
   "author": "LeoVS09",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LeoVS09/serverless-aws-node-bootstrap/issues"
+    "url": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb/issues"
   },
-  "homepage": "https://github.com/LeoVS09/serverless-aws-node-bootstrap#readme",
+  "homepage": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb#readme",
   "dependencies": {
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.10",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
+    "@types/aws-sdk": "0.0.42",
     "@types/node": "^12.12.12",
     "fork-ts-checker-webpack-plugin": "^3.0.1",
     "serverless-secrets-plugin": "^0.1.0",

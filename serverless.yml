@@ -1,5 +1,5 @@
 service:
-  name: serverless-aws-node-bootstrap
+  name: serverless-aws-node-dynamodb
 # app and org for use with dashboard.serverless.com
 app: example
 org: leovs09
@@ -17,6 +17,17 @@ provider:
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
     SECRET_SERVICE_KEY: ${self:custom.secrets.SECRET_SERVICE_KEY}
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 custom:
   secrets: ${file(./secrets.${opt:stage, self:provider.stage}.yml)}
@@ -26,13 +37,30 @@ custom:
     packager: 'yarn'
 
 functions:
-  hello:
-    handler: handler.hello
+  create:
+    handler: todos/create.create
     events:
       - http:
-          method: get
-          path: hello
-    enviroment:
+          path: todos
+          method: post
+          cors: true
       STAGE: ${self:provider.stage}
       SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
       
+resources:
+  Resources:
+    TodosDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

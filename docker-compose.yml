@@ -3,7 +3,7 @@ version: "3"
 services:
   dev-enviroment:
     build: .
-    image: serverless-aws-node:dev-enviroment
+    image: serverless-aws-node-dynamodb:dev-enviroment
     container_name: dev-enviroment
     user: root
     ports:

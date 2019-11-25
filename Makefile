@@ -9,7 +9,7 @@ export NODE_ENV=development
 # ---------------------------------------------------------------------------------------------------------------------
 
 DOCKER_IMAGE_VERSION=dev-enviroment
-DOCKER_IMAGE_TAG=serverless-aws-node:$(DOCKER_IMAGE_VERSION)
+DOCKER_IMAGE_TAG=serverless-aws-node-dynamodb:$(DOCKER_IMAGE_VERSION)
 
 # ---------------------------------------------------------------------------------------------------------------------
 # SETUP
