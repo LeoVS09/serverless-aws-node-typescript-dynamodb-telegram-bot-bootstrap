@@ -7,8 +7,10 @@ Contains:
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
 * Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 
-## Fast setup | Servless from scratch tutorial
-Just dogo step by step and you will deploy you function to AWS
+## Servless from scratch tutorial
+
+### Fast setup 
+Just go step by step and you will deploy you function to AWS
 
 ```bash
 git clone https://github.com/LeoVS09/serverless-aws-node-bootstrap.git
@@ -28,14 +30,14 @@ make console
 make deploy
 ```
 
-## Setup local enviroment
+### Setup local enviroment
 This command will generate configuration enviroment `.env` file which will be used by docker and serveless
 
 ```bash
 make setup
 ```
 
-## In docker isolated linux development
+### In docker isolated linux development
 This bootstrap allow (but not require) develop all code inside docker container
 
 This will achive you prevent problems:
@@ -53,7 +55,7 @@ Rebuild local docker image
 make docker-build
 ```
 
-## Deploy you serverless functions
+### Deploy you serverless functions
 Commands to deploy you function
 
 >Note login to serverless when deploy first time
@@ -67,7 +69,7 @@ Login to serverless
 make login
 ```
 
-## Serverless tips
+### Serverless tips
 
 You can deploy faster by update only codee and dependencies of individual function
 ```bash
@@ -89,7 +91,7 @@ Invoke function locally and print logs
 make local
 ```
 
-## Enviroment variables
+### Enviroment variables
 You can setup you enviroment variables by set them in serverless.yml file
 ```yml
     enviroment:
