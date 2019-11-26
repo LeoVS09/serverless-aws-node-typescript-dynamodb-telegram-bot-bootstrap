@@ -170,7 +170,8 @@ make decript-dev
 ```
 
 ### Tests
-Test enviroment providet by [serverless-jest-plugin](https://github.com/SC5/serverless-jest-plugin)
+Test generation providet by [serverless-mocha-plugin](https://github.com/nordcloud/serverless-mocha-plugin)
+> Currently cannot have any way to use typescript with jest powered by [serverless-jest-plugin](https://github.com/SC5/serverless-jest-plugin) or [jest-environment-serverless](https://github.com/fireeye/jest-environment-serverless). Use mocha until jest support will be realised to 1 version.
 
 You can invoke test by command
 ```bash

@@ -101,11 +101,13 @@ decript-prod:
 
 # Add test to existing handler
 create-test:
-	sls create tetst -f ${FN}
+	sls create test -f ${FN}
 
-# Tests can be run directly using Jest or using the "invoke test" command
+# Tests can be run directly using mocha or using the "invoke test" command
 test: 
-	sls invoke test
+	sls webpack -o testBuild
+	sls invoke test --root testBuild/service
+	rm -rf testBuild
 
 # Run test of function directly
 test-fn:
