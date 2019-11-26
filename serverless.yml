@@ -7,6 +7,7 @@ org: leovs09
 plugins:
   - serverless-webpack
   - serverless-secrets-plugin
+  - serverless-jest-plugin
 
 provider:
   name: aws
@@ -24,6 +25,10 @@ custom:
     webpackConfig: ./webpack.config.js
     includeModules: true
     packager: 'yarn'
+  jest:
+    # You can pass jest options here
+    # See details here: https://facebook.github.io/jest/docs/configuration.html
+    collectCoverage: true
 
 functions:
   hello:
