@@ -1,6 +1,6 @@
 #!/usr/bin/env make
 
-.PHONY: docker-console console start setup docker-build deploy deploy-fn logs invoke login local read-local-enviroment encript-dev decript-dev encript-prod decript-prod
+.PHONY: docker-console console start setup docker-build deploy deploy-fn logs invoke login local read-local-enviroment encript-dev decript-dev encript-prod decript-prod create test create-test test-fn
 
 export NODE_ENV=development
 
@@ -53,6 +53,15 @@ deploy-fn:
 logs:
 	serverless logs -f hello -t
 
+# Will create function with name `functionName` in `./api/index.js` file and 
+# a Javascript function `module.exports.handler` as the entrypoint for the Lambda function
+# and add test for them to `test/functionName.js` file
+create-function-example: 
+	sls create function -f functionName  --handler api/index.handler
+
+create:
+	sls create function -f ${FN} --handler ${HANDL}
+
 # ----------------------------------------------------- INVOKE ---------------------------------------------------------
 
 # Invoke the Lambda directly and print log statements via
@@ -87,3 +96,19 @@ encript-prod:
 # Decript prod stage secrets file with given password
 decript-prod:
 	serverless decrypt --stage prod --password ${PASSWORD}
+
+# --------------------------------------------------- TESTS --------------------------------------------------------------- 
+
+# Add test to existing handler
+create-test:
+	sls create test -f ${FN}
+
+# Tests can be run directly using mocha or using the "invoke test" command
+test: 
+	sls webpack -o testBuild
+	sls invoke test --root testBuild/service
+	rm -rf testBuild
+
+# Run test of function directly
+test-fn:
+	sls invoke test -f ${FN}

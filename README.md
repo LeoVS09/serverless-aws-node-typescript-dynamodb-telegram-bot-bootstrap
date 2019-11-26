@@ -7,8 +7,13 @@ Contains:
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
 * Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 * Encripted file variables - setup for store variables in encripted file 
+* Tests - you can develop you function by run test of functions locally
 
 ## Servless from scratch tutorial
+
+This tutorial use `make` util (it available for linux and windows) to create one file which commands you can use, 
+but if you prefer type commands by self or not want to use `make`
+you can read all command in `Makefile`. Format of file trying to be self decriptiv and easy to understand for new commers.
 
 ### Fast setup 
 Just go step by step and you will deploy you function to AWS
@@ -68,6 +73,16 @@ make deploy
 Login to serverless
 ```bash
 make login
+```
+
+### Create new function
+You can create new function by `sls create` command
+
+This command will generate for you new handler file, add new function to `serverless.yml` config and add intial test
+
+You can use predefined `make` command for it
+```bash
+make FN=newFunction HANDL=api/functionc/index create 
 ```
 
 ### Serverless tips
@@ -154,3 +169,26 @@ After new checkout this file must be decripted for deploy ny command
 make decript-dev
 ```
 
+### Tests
+Test generation providet by [serverless-mocha-plugin](https://github.com/nordcloud/serverless-mocha-plugin)
+> Currently cannot have any way to use typescript with jest powered by [serverless-jest-plugin](https://github.com/SC5/serverless-jest-plugin) or [jest-environment-serverless](https://github.com/fireeye/jest-environment-serverless). Use mocha until jest support will be realised to 1 version.
+
+You can invoke test by command
+```bash
+make test
+```
+
+or run tests to one function by
+```bash
+make FN=hello test 
+```
+
+also you can add test to existing function
+```bash
+make FN=hello create-test
+```
+
+and when you create new handler it will create test for you automatically
+```bash
+make FN=newFunction HANDL=api/functionc/index create 
+```

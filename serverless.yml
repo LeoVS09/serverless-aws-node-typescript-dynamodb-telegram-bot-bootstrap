@@ -7,6 +7,7 @@ org: leovs09
 plugins:
   - serverless-webpack
   - serverless-secrets-plugin
+  - serverless-mocha-plugin
 
 provider:
   name: aws
