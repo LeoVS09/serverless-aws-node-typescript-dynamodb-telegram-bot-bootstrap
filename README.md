@@ -13,7 +13,7 @@ Contains:
 
 This tutorial use `make` util (it available for linux and windows) to create one file which commands you can use, 
 but if you prefer type commands by self or not want to use `make`
-you can read all command in `Makefile`. Format of file trying to be self decriptiv and easy to understand for new commers.
+you can read all command in `Makefile`. Format of file trying to be self decriptive and easy to understand for new commers.
 
 ### Fast setup 
 Just go step by step and you will deploy you function to AWS
