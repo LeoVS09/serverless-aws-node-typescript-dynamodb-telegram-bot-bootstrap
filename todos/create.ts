@@ -2,7 +2,20 @@ import * as uuid from 'uuid'
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { DynamoDB } from 'aws-sdk'
 
-const dynamoDb = new DynamoDB.DocumentClient()
+const isDevelopment = process.env.NODE_ENV === 'development';
+
+const dynamoDb = new DynamoDB.DocumentClient(isDevelopment && {
+
+  // Setup local dynamo db if function run by `invoke`
+  region: 'localhost',
+  endpoint: 'http://dynamo:8000',
+  
+  // needed if you run dynamodb in another container
+  accessKeyId: 'MOCK_ACCESS_KEY_ID',  
+  secretAccessKey: 'MOCK_SECRET_ACCESS_KEY' 
+
+  // use https://github.com/99xt/serverless-dynamodb-client if run dynamodb in same container
+})
 
 const tableName = process.env.DYNAMODB_TABLE
 

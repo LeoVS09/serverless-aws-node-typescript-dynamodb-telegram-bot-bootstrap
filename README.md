@@ -9,6 +9,8 @@ Contains:
 * Encripted file variables - setup for store variables in encripted file 
 * Tests - you can develop you function by run test of functions locally
 * DynamoDB - setup for star work with dynamodb
+* Offline - allow you start you server local and develop without deploys (you can curl your functions)
+* DynamoDB Local - setup for local instance of DynamoDB will allow you develop on local machine with database
 
 ## Servless from scratch tutorial
 
@@ -187,6 +189,8 @@ make decript-dev "Password"
 Test generation providet by [serverless-mocha-plugin](https://github.com/nordcloud/serverless-mocha-plugin)
 > Currently cannot have any way to use typescript with jest powered by [serverless-jest-plugin](https://github.com/SC5/serverless-jest-plugin) or [jest-environment-serverless](https://github.com/fireeye/jest-environment-serverless). Use mocha until jest support will be realised to 1 version.
 
+*Before test any function which depend on DynamoDB install and start local inctance of DynamoDB*
+
 You can invoke test by command
 ```bash
 make test
@@ -212,3 +216,94 @@ and when you create new handler it will create test for you automatically
 make FN=newFunction HANDL=api/functionc/index create 
 # sls create test -f newFunction --handler api/functionc/index
 ```
+
+### Local development
+If you want use AWS SDK or work with dynamodb on you machine you need `serverless-offline` and/or `serverleess-dynamodb-local`
+
+`serverless-offline` - allow you run command
+```bash
+# Will start local inctance of serverless which you can curl (default on 3000 port)
+make offline
+# sls offline start
+```
+
+`serverless-dynamodb-client` will automatically handle enviroment and try to connect to local instance when run locally
+
+#### Run offline not in docker
+You need disable option which allow connect outside of container
+```yml
+# serverless.yml
+custom:
+  serverless-offline:
+    # disable if you run offline outside of container
+    host: "0.0.0.0" # allow connect outside 
+```
+
+#### Run DynamoDB not in container
+
+By default in this bootstrap is included `serverleess-dynamodb-local` and `dynamo` container which will started automatically when you run `make console` and will connect on start
+
+But if you want just start local instance DynamoDB on you machine or inside your conteiner without any other
+Firstly you must install dynamodb on you machine
+```bash
+make dynamodb-install:
+# sls dynamodb install
+```
+
+Then you disable options which tell `serverleess-dynamodb-local` connect to container
+```yml
+# serverless.yml
+custom:
+  dynamodb:
+    start:
+      # Please disable nearest options to start and connect in local machine
+      host: dynamo # or the name of your Dynamo docker container
+      port: "8000" # the port of our Dynamo docker container
+      noStart: true
+```
+
+Then type this command to start dynamodb locally
+```bash
+# Will start local instance of DynamoDB (on 8000 port by default)
+make dynamodb-start
+# sls dynamodb start
+```
+
+#### Seed Database
+
+You can add *seed* option which will inject data on start of inctance DynamoDB
+```yml
+# serverless.yml
+custom:
+  dynamodb:
+    start:
+      seed: true
+
+    seed:
+      domain:
+        sources:
+          - table: domain-widgets
+            sources: [./domainWidgets.json]
+          - table: domain-fidgets
+            sources: [./domainFidgets.json]
+      test:
+        sources:
+          - table: users
+            rawsources: [./fake-test-users.json]
+          - table: subscriptions
+            sources: [./fake-test-subscriptions.json]
+```
+
+Which you can use on seed command to inject data
+```bash
+make dynamodb-seed domain,test
+# sls dynamodb seed --seed=domain,test
+```
+
+Or seed on start of inctance
+```bash
+make dynamodb-start --seed=domain,test
+# sls dynamodb start --seed=domain,test
+```
+
+*Not forget to add fake data `.json` files before make seed*
