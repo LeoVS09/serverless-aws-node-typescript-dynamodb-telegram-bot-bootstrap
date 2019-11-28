@@ -7,9 +7,14 @@ Contains:
 * webpack serverless setup - to compile typescript and pack for deploy node_modules 
 * Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 * Encripted file variables - setup for store variables in encripted file 
+* Tests - you can develop you function by run test of functions locally
 * DynamoDB - setup for star work with dynamodb
 
 ## Servless from scratch tutorial
+
+This tutorial use `make` util (it available for linux and windows) to create one file which commands you can use, 
+but if you prefer type commands by self or not want to use `make`
+you can read all command in `Makefile`. Format of file trying to be self decriptive and easy to understand for new commers.
 
 ### Fast setup 
 Just go step by step and you will deploy you function to AWS
@@ -30,6 +35,7 @@ make console
 
 # Then deploy you function to AWS
 make deploy
+# will run serverless deploy
 ```
 
 ### Setup local enviroment
@@ -64,33 +70,51 @@ Commands to deploy you function
 Deploy to aws cloud by serverless 
 ```bash
 make deploy
+# serverless deploy
 ```
 
 Login to serverless
 ```bash
 make login
+# serverless login
+```
+
+### Create new function
+You can create new function by `sls create` command
+
+This command will generate for you new handler file, add new function to `serverless.yml` config and add intial test
+
+You can use predefined `make` command for it
+```bash
+make FN=newFunction HANDL=api/functionc/index create 
+# sls create function -f newFunction --handler api/functionc/index
 ```
 
 ### Serverless tips
 
 You can deploy faster by update only codee and dependencies of individual function
+Example for `hello` function
 ```bash
-make deploy-fn
+make deploy-fn hello
+# sls deploy function -f hello
 ```
 
-Get logs of deployed function
+Get logs of deployed `hello` function
 ```bash
-make logs
+make logs hello
+# serverless logs -t -f hello
 ```
 
 Invoke function in cloud and print their log
 ```bash
-make invoke
+make invoke hello
+# serverless invoke --log --function=hello
 ```
 
 Invoke function locally and print logs
 ```bash
-make local
+make local hello
+# serverless invoke local --log --function=hello
 ```
 
 ### Enviroment variables
@@ -112,7 +136,8 @@ For setup it from file we maked `dev.env` file which will be readed by make comm
 
 So you can just run it by
 ```bash
-make local
+make local-env hello
+# . ./dev.env && serverless invoke local --log -e SECRET_FUNCTION_TOKEN="$$SECRET_FUNCTION_TOKEN" --function=hello
 ```
 
 ### Encription
@@ -138,13 +163,15 @@ And when you will run `serverless deploy` it will push variables from file
 If you can store and push variables for defferent stages by add stage parameter to deploy
 ```bash
 # will read secrets from secrets.prod.yml file
-serverless deploy --stage prod 
+make deploy --stage prod 
+# serverless deploy --stage prod
 ```
 
 Also you can encript file by password
 ```bash
 # Will generate secrets.dev.yml.encripted
-make encript-dev <Your password>
+make encript-dev "Password"
+# serverless encrypt --stage dev --password "Password"
 ```
 
 And add `secrets.dev.yml.encripted file to git
@@ -152,6 +179,36 @@ And add `secrets.dev.yml.encripted file to git
 After new checkout this file must be decripted for deploy ny command
 ```bash
 # Will decript file secrets.dev.yml.encripted to secrets.dev.yml
-make decript-dev
+make decript-dev "Password"
+# serverless decrypt --stage dev --password "Password"
 ```
 
+### Tests
+Test generation providet by [serverless-mocha-plugin](https://github.com/nordcloud/serverless-mocha-plugin)
+> Currently cannot have any way to use typescript with jest powered by [serverless-jest-plugin](https://github.com/SC5/serverless-jest-plugin) or [jest-environment-serverless](https://github.com/fireeye/jest-environment-serverless). Use mocha until jest support will be realised to 1 version.
+
+You can invoke test by command
+```bash
+make test
+# sls webpack -o testBuild
+# sls invoke test --root testBuild/service
+#	rm -rf testBuild
+```
+
+or run tests to one function by
+```bash
+make test-fn hello 
+# sls invoke test -f hello
+```
+
+also you can add test to existing function
+```bash
+make create-test hello
+# sls create test -f hello
+```
+
+and when you create new handler it will create test for you automatically
+```bash
+make FN=newFunction HANDL=api/functionc/index create 
+# sls create test -f newFunction --handler api/functionc/index
+```
