@@ -34,6 +34,7 @@ make console
 
 # Then deploy you function to AWS
 make deploy
+# will run serverless deploy
 ```
 
 ### Setup local enviroment
@@ -68,11 +69,13 @@ Commands to deploy you function
 Deploy to aws cloud by serverless 
 ```bash
 make deploy
+# serverless deploy
 ```
 
 Login to serverless
 ```bash
 make login
+# serverless login
 ```
 
 ### Create new function
@@ -83,28 +86,34 @@ This command will generate for you new handler file, add new function to `server
 You can use predefined `make` command for it
 ```bash
 make FN=newFunction HANDL=api/functionc/index create 
+# sls create function -f newFunction --handler api/functionc/index
 ```
 
 ### Serverless tips
 
 You can deploy faster by update only codee and dependencies of individual function
+Example for `hello` function
 ```bash
-make deploy-fn
+make deploy-fn hello
+# sls deploy function -f hello
 ```
 
-Get logs of deployed function
+Get logs of deployed `hello` function
 ```bash
-make logs
+make logs hello
+# serverless logs -t -f hello
 ```
 
 Invoke function in cloud and print their log
 ```bash
-make invoke
+make invoke hello
+# serverless invoke --log --function=hello
 ```
 
 Invoke function locally and print logs
 ```bash
-make local
+make local hello
+# serverless invoke local --log --function=hello
 ```
 
 ### Enviroment variables
@@ -126,7 +135,8 @@ For setup it from file we maked `dev.env` file which will be readed by make comm
 
 So you can just run it by
 ```bash
-make local
+make local-env hello
+# . ./dev.env && serverless invoke local --log -e SECRET_FUNCTION_TOKEN="$$SECRET_FUNCTION_TOKEN" --function=hello
 ```
 
 ### Encription
@@ -152,13 +162,15 @@ And when you will run `serverless deploy` it will push variables from file
 If you can store and push variables for defferent stages by add stage parameter to deploy
 ```bash
 # will read secrets from secrets.prod.yml file
-serverless deploy --stage prod 
+make deploy --stage prod 
+# serverless deploy --stage prod
 ```
 
 Also you can encript file by password
 ```bash
 # Will generate secrets.dev.yml.encripted
-make encript-dev <Your password>
+make encript-dev "Password"
+# serverless encrypt --stage dev --password "Password"
 ```
 
 And add `secrets.dev.yml.encripted file to git
@@ -166,7 +178,8 @@ And add `secrets.dev.yml.encripted file to git
 After new checkout this file must be decripted for deploy ny command
 ```bash
 # Will decript file secrets.dev.yml.encripted to secrets.dev.yml
-make decript-dev
+make decript-dev "Password"
+# serverless decrypt --stage dev --password "Password"
 ```
 
 ### Tests
@@ -176,19 +189,25 @@ Test generation providet by [serverless-mocha-plugin](https://github.com/nordclo
 You can invoke test by command
 ```bash
 make test
+# sls webpack -o testBuild
+# sls invoke test --root testBuild/service
+#	rm -rf testBuild
 ```
 
 or run tests to one function by
 ```bash
-make FN=hello test 
+make test-fn hello 
+# sls invoke test -f hello
 ```
 
 also you can add test to existing function
 ```bash
-make FN=hello create-test
+make create-test hello
+# sls create test -f hello
 ```
 
 and when you create new handler it will create test for you automatically
 ```bash
 make FN=newFunction HANDL=api/functionc/index create 
+# sls create test -f newFunction --handler api/functionc/index
 ```
