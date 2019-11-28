@@ -32,7 +32,7 @@ docker-build:
 	@docker build -t $(DOCKER_IMAGE_TAG) .
 
 docker-console:
-	docker-compose run --rm --publish=8081:8081 dev-enviroment /bin/bash
+	docker-compose run --rm --publish=3000:3000 dev-enviroment /bin/bash
 
 console: docker-console
 
@@ -123,3 +123,38 @@ test:
 # Example: make test-fn hello
 test-fn:
 	sls invoke test -f $(call args)
+
+# -------------------------------------------------- OFFLINE -------------------------------------------------------------- 
+
+# Will start service offline so you can curl you lambdas (default port: 3000)
+offline:
+	sls offline start
+
+# start command will fire an init and a end lifecycle hook which is needed for serverless-offline and serverless-dynamodb-local to switch off both ressources
+# if you not want it you can run
+offline-without-db:
+	sls offline
+
+# ------------------------------------------------ DYNAMO-DB --------------------------------------------------------------
+
+# Install AWS DynamoDB locally for invoke function which require DynamoDB
+dynamodb-install:
+	sls dynamodb install
+
+# Uninstall AWS DynamoDB 
+dynamodb-remove:
+	sls dynamodb remove
+
+# Start AWS DynamoDB
+dynamodb-start:
+	sls dynamodb start $(call args)
+
+# Inject data into DynamoDB
+dynamodb-seed:
+	sls dynamodb seed --seed=$(call args)
+
+# ------------------------------------------------ API EXAMPLE --------------------------------------------------------------
+
+# Will create new todo in offline start service and return all
+create-todo:
+	curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'

@@ -1,14 +1,26 @@
 version: "3"
 
 services:
+
   dev-enviroment:
     build: .
     image: serverless-aws-node-dynamodb:dev-enviroment
     container_name: dev-enviroment
     user: root
     ports:
-      - 8081:8081
+      - 3000:3000
     volumes:
       - .:/app/.
     env_file:
       ./.env
+    
+    depends_on:
+      - dynamo
+    links:
+      - dynamo
+  
+  dynamo:
+    image: amazon/dynamodb-local:1.11.477
+    container_name: dynamo
+    ports:
+      - 8000:8000

@@ -8,6 +8,9 @@ plugins:
   - serverless-webpack
   - serverless-secrets-plugin
   - serverless-mocha-plugin
+  # dynamodb-local must be loaded before offline for start automatically
+  - serverless-dynamodb-local
+  - serverless-offline
 
 provider:
   name: aws
@@ -32,12 +35,40 @@ provider:
 
 custom:
   secrets: ${file(./secrets.${opt:stage, self:provider.stage}.yml)}
+  
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules:
       forceExclude:
         - aws-sdk
     packager: 'yarn'
+  
+  serverless-offline:
+    printOutput: true
+    noAuth: true
+    host: 0.0.0.0 # allow connect outside use only if you inside of container
+  
+  dynamodb:
+    # If you only want to use DynamoDB Local in some stages, declare them here
+    stages:
+      - dev
+    start:
+      host: dynamo # or the name of your Dynamo docker container
+      port: "8000" # the port of our Dynamo docker container
+      noStart: true
+
+      # Will setup dynamodb on start with you Table scheme
+      migrate: true
+      # Define is need to inject data on start
+      #seed: true
+    
+    #seed:
+    #  source:
+    #    test:
+    #      sources:
+    #        - table: TodosDynamoDbTable
+    #          rawsources: [./fake-test-todo.json]
+
 
 functions:
   hello:
@@ -49,6 +80,7 @@ functions:
     enviroment:
       STAGE: ${self:provider.stage}
       SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
+  
   create:
     handler: todos/create.create
     events:
