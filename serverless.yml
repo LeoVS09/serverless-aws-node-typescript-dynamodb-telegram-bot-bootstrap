@@ -40,6 +40,15 @@ custom:
     packager: 'yarn'
 
 functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          method: get
+          path: hello
+    enviroment:
+      STAGE: ${self:provider.stage}
+      SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
   create:
     handler: todos/create.create
     events:
