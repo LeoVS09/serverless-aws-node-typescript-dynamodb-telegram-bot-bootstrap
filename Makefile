@@ -29,7 +29,7 @@ docker-build:
 	@docker build -t $(DOCKER_IMAGE_TAG) .
 
 docker-console:
-	docker-compose run --rm --publish=8080:8080 dev-enviroment /bin/bash
+	docker-compose run --rm --publish=8081:8081 dev-enviroment /bin/bash
 
 console: docker-console
 
