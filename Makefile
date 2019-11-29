@@ -156,5 +156,17 @@ dynamodb-seed:
 # ------------------------------------------------ API EXAMPLE --------------------------------------------------------------
 
 # Will create new todo in offline start service and return all
-create-todo:
+todo-create:
 	curl -X POST -H "Content-Type:application/json" http://localhost:3000/todos --data '{ "text": "Learn Serverless" }'
+
+todo-list:
+	curl -X GET -H "Content-Type:application/json" http://localhost:3000/todos
+
+todo-get:
+	curl -X GET -H "Content-Type:application/json" http://localhost:3000/todos/$(call args)
+
+todo-update:
+	curl -X PUT -H "Content-Type:application/json" http://localhost:3000/todos/$(call args) --data '{ "text": "changed todo", "checked": true }'
+
+todo-delete:
+	curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/todos/$(call args)

@@ -307,3 +307,23 @@ make dynamodb-start --seed=domain,test
 ```
 
 *Not forget to add fake data `.json` files before make seed*
+
+### Auto-scaling
+
+#### AWS Lambda
+
+By default, AWS Lambda limits the total concurrent executions across all functions within a given region to 100. The default limit is a safety limit that protects you from costs due to potential runaway or recursive functions during initial development and testing. To increase this limit above the default, follow the steps in [To request a limit increase for concurrent executions](http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html#increase-concurrent-executions-limit).
+
+#### DynamoDB
+
+When you create a table, you specify how much provisioned throughput capacity you want to reserve for reads and writes. DynamoDB will reserve the necessary resources to meet your throughput needs while ensuring consistent, low-latency performance. You can change the provisioned throughput and increasing or decreasing capacity as needed.
+
+```yml
+# serverless.yml
+# This options control DynamoDB limits
+  ProvisionedThroughput:
+    ReadCapacityUnits: 1
+    WriteCapacityUnits: 1
+```
+
+In case you expect a lot of traffic fluctuation we recommend to checkout this [guide on how to auto scale DynamoDB](https://aws.amazon.com/blogs/aws/auto-scale-dynamodb-with-dynamic-dynamodb/)
