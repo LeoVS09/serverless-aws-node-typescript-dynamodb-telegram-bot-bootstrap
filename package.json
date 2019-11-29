@@ -1,14 +1,14 @@
 {
-  "name": "serverless-aws-node-dynamodb",
+  "name": "serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap",
   "version": "0.1.0",
-  "description": "Base setup of enviroment and tools to start develop on lambda functions with DynamoDB from zero (minimal) configuration",
+  "description": "Base setup of enviroment and tools to start develop telegram bot on lambda functions with DynamoDB from zero (minimal) configuration",
   "main": "handler.js",
   "scripts": {
     "deploy": "make deploy"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb.git"
+    "url": "git+https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap.git"
   },
   "keywords": [
     "aws",
@@ -21,9 +21,9 @@
   "author": "LeoVS09",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb/issues"
+    "url": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap/issues"
   },
-  "homepage": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb#readme",
+  "homepage": "https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap#readme",
   "dependencies": {
     "@aws/dynamodb-data-mapper-annotations": "^0.7.3",
     "@aws/dynamodb-data-mapper": "^0.7.3",

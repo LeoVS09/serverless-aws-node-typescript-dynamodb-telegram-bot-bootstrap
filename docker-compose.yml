@@ -4,7 +4,7 @@ services:
 
   dev-enviroment:
     build: .
-    image: serverless-aws-node-dynamodb:dev-enviroment
+    image: serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap:dev-enviroment
     container_name: dev-enviroment
     user: root
     ports:

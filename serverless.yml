@@ -1,5 +1,5 @@
 service:
-  name: serverless-aws-node-dynamodb
+  name: serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap
 # app and org for use with dashboard.serverless.com
 app: example
 org: leovs09

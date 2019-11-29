@@ -12,7 +12,7 @@ args = $(filter-out $@,$(MAKECMDGOALS))
 # ---------------------------------------------------------------------------------------------------------------------
 
 DOCKER_IMAGE_VERSION=dev-enviroment
-DOCKER_IMAGE_TAG=serverless-aws-node-dynamodb:$(DOCKER_IMAGE_VERSION)
+DOCKER_IMAGE_TAG=serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap:$(DOCKER_IMAGE_VERSION)
 
 # ---------------------------------------------------------------------------------------------------------------------
 # SETUP
