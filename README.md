@@ -1,5 +1,5 @@
-# Serverless AWS Node DynamoDB Bootstrap
-Base setup of enviroment and tools to start develop on lambda functions from zero (minimal) configuration
+# Serverless AWS Node DynamoDB Telegram Bot Bootstrap
+Base setup of enviroment and tools to start develop telegram bot on lambda functions with DynamoDB from zero (minimal) configuration
 
 Contains:
 * node enviroment setup 
