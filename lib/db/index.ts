@@ -1,150 +1,77 @@
 // If you want change cloud in easy way you must write abstraction on database
 import * as DynamoDB from 'aws-sdk/clients/dynamodb'
+import {DataMapper, ScanIterator} from '@aws/dynamodb-data-mapper';
 import initializeDatabase from "./init"
-import { TodoModel } from './model';
-import * as uuid from 'uuid';
+import { Todo } from './model';
+// Guide about AWS DynamoDB data mapper https://aws.amazon.com/ru/blogs/developer/introducing-the-amazon-dynamodb-datamapper-for-javascript-developer-preview/
 
 export class TodoDatabase {
-    instance: DynamoDB.DocumentClient;
+    instance: DynamoDB;
     tableName: string;
+    mapper: DataMapper
 
     constructor(){
         this.instance = initializeDatabase();
         this.tableName = process.env.DYNAMODB_TABLE;
+        this.mapper = new DataMapper({ client: this.instance })
         
         console.log('using table', this.tableName)
     }
 
-    get baseParams() {
-        return {
-            TableName: this.tableName
-        }
+    create(text: string, checked = false): Promise<Todo> {
+
+        const todo = new Todo()
+
+        const currentDate = new Date()
+
+        todo.createdAt = currentDate
+        todo.updatedAt = currentDate
+
+        todo.text = text
+        todo.checked = checked
+
+        return this.mapper.put(todo)
+            .then(() => todo)
     }
 
+    get(id: string): Promise<Todo> {
 
-    create(text: string, checked = false): Promise<TodoModel> {
-        const timestamp = getCurrentTimestamp();
 
-        const item: TodoModel = {
-            id: uuid.v1(),
-            text,
-            checked,
-            createdAt: timestamp,
-            updatedAt: timestamp
-        }
+        const toFetch = new Todo()
 
-        const params = {
-            ...this.baseParams,
-            Item: item
-        }
+        toFetch.id = id
 
-        return new Promise((resolve, reject) => 
-            this.instance.put(params, err => {
-                if(err) {
-                    reject(err)
-                    return
-                }
-
-                resolve(params.Item)
-            })
-        )
+        return this.mapper.get(toFetch)
     }
 
-    get(id: string): Promise<TodoModel> {
+    // Example async list iteration 
+    // for await (const todo of db.list()) {
+    //      Each post is an instance of the Post class
+    // }
 
-        const params = {
-            ...this.baseParams,
-            Key: {
-                id
-            }
-        }
-
-        return new Promise<TodoModel>((resolve, reject) => {
-            this.instance.get(params, (err, result) => {
-                if(err) {
-                    reject(err)
-                    return
-                }
-
-                resolve(result.Item as TodoModel)
-            })
-        })
-
+    list(): ScanIterator<Todo> {
+        return this.mapper.scan<Todo>({valueConstructor: Todo})
     }
 
-    list(): Promise<Array<TodoModel>> {
-        const params = this.baseParams
+    update(id: string, text: string, checked: boolean): Promise<Todo> {
+        const todo = new Todo()
 
-        return new Promise<Array<TodoModel>>((resolve, reject) => {
-            this.instance.scan(params, (err, result) => {
-                if(err) {
-                    reject(err)
-                    return
-                }
+        todo.id = id
+        todo.text = text
+        todo.checked = checked
+        todo.updatedAt = new Date()
 
-                console.log('list items', result)
-
-                resolve(result.Items as Array<TodoModel>)
-            })
-        })
+        return this.mapper.put(todo)
     }
 
-    update(id: string, text: string, checked: boolean): Promise<TodoModel> {
-        const timestamp = getCurrentTimestamp()
+    delete(id: string): Promise<Todo | undefined> {
+        const todo = new Todo()
+        todo.id = id
 
-        const params = {
-            ...this.baseParams,
-            Key: {
-                id
-            }, 
-            ExpressionAttributeNames: {
-                '#todo_text': 'text',
-            },
-            ExpressionAttributeValues: {
-                ':text': text,
-                ':checked': checked,
-                ':updatedAt': timestamp,
-            },
-            UpdateExpression: 'SET #todo_text = :text, checked = :checked, updatedAt = :updatedAt',
-            ReturnValues: 'ALL_NEW',
-        }
-
-        return new Promise((resolve, reject) => {
-            this.instance.update(params, (error, result) => {
-                if(error) {
-                    reject(error)
-                    return
-                }
-
-                resolve(result.Attributes as TodoModel)
-            })
-        })
-    }
-
-    delete(id: string): Promise<void> {
-        const params = {
-            ...this.baseParams,
-            Key: {
-                id
-            }
-        }
-
-        return new Promise((resolve, reject) => {
-            this.instance.delete(params, (error) => {
-                if (error) {
-                    reject(error)
-                    return
-                }
-    
-                resolve()
-            })
-        })
+        return this.mapper.delete(todo)
     }
 
 }
-
-
-const getCurrentTimestamp = () => new Date().getTime()
 
 export const defaultDb = new TodoDatabase()
 
