@@ -21,7 +21,7 @@ export const update = wrapLambda(async (event, _context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(item)
+        body: JSON.stringify(item, null, 2)
     }
 
 })

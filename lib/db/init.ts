@@ -2,7 +2,7 @@ import * as DynamoDB from 'aws-sdk/clients/dynamodb'
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-export default () => new DynamoDB.DocumentClient(isDevelopment && {
+export default () => new DynamoDB(isDevelopment && {
 
     // Setup local dynamo db if function run by `invoke`
     region: 'localhost',
