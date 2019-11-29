@@ -34,7 +34,7 @@
     "@types/aws-sdk": "0.0.42",
     "@types/istanbul-lib-coverage": "^2.0.1",
     "@types/node": "^12.12.12",
-    "aws-sdk": "2.579.0",
+    "aws-sdk": "2.580.0",
     "fork-ts-checker-webpack-plugin": "^3.0.1",
     "serverless": "^1.58.0",
     "serverless-dynamodb-local": "^0.2.38",
