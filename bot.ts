@@ -13,10 +13,6 @@ const keyboard = Markup.keyboard([
   .oneTime()
   .resize();
 
-const baseOptions = {
-    parse_mode: 'Markdown'
-}
-
 bot.start((ctx) => ctx.reply('Hello'))
 bot.hears('hi', ctx => ctx.reply('Hey there!', Extra.markup(keyboard)))
 
