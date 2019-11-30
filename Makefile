@@ -170,3 +170,10 @@ todo-update:
 
 todo-delete:
 	curl -X DELETE -H "Content-Type:application/json" http://localhost:3000/todos/$(call args)
+
+# ---------------------------------------------------------------------------------------------------------------------
+# TELEGRAM
+# ---------------------------------------------------------------------------------------------------------------------
+
+make webhook:
+	curl --request POST --url https://api.telegram.org/bot${TOKEN}/setWebhook --header 'content-type: application/json' --data '{"url": "$(call args)"}'

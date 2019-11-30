@@ -1,15 +1,17 @@
-import { APIGatewayProxyHandler } from 'aws-lambda';
-import 'source-map-support/register';
+import wrapLambda from './lib/api'
+import request from 'request'
+import 'source-map-support/register'
 
-const message = `
-  Serverless Webpack (Typescript) with DynamoDB v0.1.0 Bootstrap! Your function executed successfully!
-  Secret function token "${process.env.SECRET_FUNCTION_TOKEN}" from enviroment
-  Secret value "${process.env.SECRET_SERVICE_KEY}" from file
-`
+const token = process.env.TELEGRAM_TOKEN
+const BASE_URL = `https://api.telegram.org/bot${token}/sendMessage`;
 
-export const hello: APIGatewayProxyHandler = async (event, _context) => {
-  console.log('process.env', process.env)
-  console.log('Was received message, reply with:', message)
+export const webhook = wrapLambda(async (event, _context) => {
+  
+  const body = JSON.parse(event.body)
+  const message = body.message
+  const chatId = message.chat.id
+
+  request.post(BASE_URL).form({ text: message.text, chat_id: chatId });
 
   return {
     statusCode: 200,
@@ -18,4 +20,5 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
       input: event,
     }, null, 2),
   };
-}
+})
+

@@ -34,6 +34,7 @@ echo "Generate dev stage secrets 'secrets.dev.yml' file..."
 
 cat >> secrets.dev.yml <<CONFIG
 SECRET_SERVICE_KEY: SOME_SECRET_KEY
+TELEGRAM_TOKEN: TELEGRAM_BOT_TOKEN
 CONFIG
 
 chmod +rw secrets.dev.yml

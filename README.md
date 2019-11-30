@@ -34,10 +34,28 @@ make console
 
 # Write you project name, app, org into serverless.yml
 # app and org you can find into you dashboard.serverless.com
+```
 
-# Then deploy you function to AWS
+Then create a bot from Telegram, sending this message to [@BotFather](https://web.telegram.org/#/im?p=@BotFather)
+```bash
+/newbot
+```
+
+Put received token to `secrets.dev.yml`
+```yml
+TELEGRAM_TOKEN: YOUT_TELEGRAM_BOT_TOKEN
+```
+
+Then deploy you function to AWS
+```bash
 make deploy
 # will run serverless deploy
+```
+
+Configure webhook to telegram
+```bash
+make TOKEN={token} webhook {end-poinnt}
+# curl --request POST --url https://api.telegram.org/bot{token}/setWebhook --header 'content-type: application/json' --data '{"url": "{end-poinnt}"}'
 ```
 
 ### Setup local enviroment

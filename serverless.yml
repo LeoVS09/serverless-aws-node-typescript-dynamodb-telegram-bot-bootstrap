@@ -1,5 +1,5 @@
 service:
-  name: serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap
+  name: serverless-tg-bot-with-db-bootstrap
 # app and org for use with dashboard.serverless.com
 app: example
 org: leovs09
@@ -18,10 +18,13 @@ provider:
   runtime: nodejs12.x
   apiGateway:
     minimumCompressionSize: 1024 # Enable gzip compression for responses > 1 KB
+  
   environment:
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
     SECRET_SERVICE_KEY: ${self:custom.secrets.SECRET_SERVICE_KEY}
+    TELEGRAM_TOKEN: ${self:custom.secrets.TELEGRAM_TOKEN}
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -71,12 +74,12 @@ custom:
 
 
 functions:
-  hello:
-    handler: handler.hello
+  webhook:
+    handler: handler.webhook
     events:
       - http:
-          method: get
-          path: hello
+          method: post
+          path: webhook
     enviroment:
       STAGE: ${self:provider.stage}
       SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
