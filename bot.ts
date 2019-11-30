@@ -21,15 +21,15 @@ bot.hears(/Add (.+)/, async ({match, reply, chat}) => {
 
   await db.create(chat.id, text)
 
-  reply(`${text} *successfully added!*`, markup)
+  await reply(`${text} *successfully added!*`, markup)
 })
 
 bot.hears('List', async ({reply, chat}) => {
-  reply('*TODO*:', markup)
+  await reply('*TODO*:', markup)
 
   for await (const todo of db.list()) {
     if(todo.chatId === chat.id)
-      reply(todo.text)
+      await reply(todo.text)
   }
 })
 
@@ -43,7 +43,7 @@ bot.hears(/Done (.+)/, async ({match, reply, chat}) => {
 
     await db.delete(todo.id)
 
-    reply(`${todo.text} *completed!*`, markup)
+    await reply(`${todo.text} *completed!*`, markup)
   }
 
 })
