@@ -18,7 +18,7 @@ export class TodoDatabase {
         console.log('using table', this.tableName)
     }
 
-    create(text: string, checked = false): Promise<Todo> {
+    create(chatId: number, text: string, checked = false): Promise<Todo> {
 
         const todo = new Todo()
 
@@ -26,6 +26,8 @@ export class TodoDatabase {
 
         todo.createdAt = currentDate
         todo.updatedAt = currentDate
+
+        todo.chatId = chatId;
 
         todo.text = text
         todo.checked = checked
@@ -35,8 +37,6 @@ export class TodoDatabase {
     }
 
     get(id: string): Promise<Todo> {
-
-
         const toFetch = new Todo()
 
         toFetch.id = id

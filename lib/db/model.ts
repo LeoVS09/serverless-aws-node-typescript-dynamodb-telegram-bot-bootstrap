@@ -20,6 +20,9 @@ export class Todo {
     // payload
 
     @attribute()
+    chatId?: number;
+
+    @attribute()
     text: string;
 
     @attribute()
