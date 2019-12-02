@@ -1,16 +1,19 @@
 # Serverless AWS Node DynamoDB Telegram Bot Bootstrap
-Base setup of enviroment and tools to start develop telegram bot on lambda functions with DynamoDB from zero (minimal) configuration
+This is simple setup todo bot which you can find as [TodoXBot](http://t.me/TodoXbot) in telegram.
+
+He contains base setup of enviroment and tools to start develop telegram bot on lambda functions with DynamoDB from zero (minimal) configuration
 
 Contains:
-* node enviroment setup 
-* typescript setup 
-* webpack serverless setup - to compile typescript and pack for deploy node_modules 
+* Node enviroment setup 
+* Typescript setup 
+* Webpack serverless setup - to compile typescript and pack for deploy node_modules 
 * Enviroment variables - setup for work with enviroment variables, you can setup their local and in produciton
 * Encripted file variables - setup for store variables in encripted file 
 * Tests - you can develop you function by run test of functions locally
 * DynamoDB - setup for star work with dynamodb
 * Offline - allow you start you server local and develop without deploys (you can curl your functions)
 * DynamoDB Local - setup for local instance of DynamoDB will allow you develop on local machine with database
+* Telegraf - library for simplify work with Telegram API
 
 ## Servless from scratch tutorial
 
@@ -54,7 +57,7 @@ make deploy
 
 Configure webhook to telegram
 ```bash
-make TOKEN={token} webhook {end-poinnt}
+make TOKEN={token} telegram-webhook {end-poinnt}
 # curl --request POST --url https://api.telegram.org/bot{token}/setWebhook --header 'content-type: application/json' --data '{"url": "{end-poinnt}"}'
 ```
 

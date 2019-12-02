@@ -175,5 +175,5 @@ todo-delete:
 # TELEGRAM
 # ---------------------------------------------------------------------------------------------------------------------
 
-make webhook:
+make telegram-webhook:
 	curl --request POST --url https://api.telegram.org/bot${TOKEN}/setWebhook --header 'content-type: application/json' --data '{"url": "$(call args)"}'

@@ -4,7 +4,7 @@ import botHandler from './bot'
 
 
 
-export const webhook = wrapLambda(async (event, _context) => {
+export const telegram = wrapLambda(async (event, _context) => {
   
   const tmp = JSON.parse(event.body)
   await botHandler(tmp)
