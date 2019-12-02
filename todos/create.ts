@@ -2,6 +2,10 @@ import db from '../lib/db'
 import wrapLambda  from '../lib/api'
 
 export const create = wrapLambda(async (event, _context) => {
+  const { chat_id } = event.pathParameters
+
+  const chatId = +chat_id || -1 // try parse parametr or use default
+
   const data = JSON.parse(event.body)
 
   if (typeof data.text !== 'string') {
@@ -10,7 +14,7 @@ export const create = wrapLambda(async (event, _context) => {
     return
   }
 
-  const item = await db.create(data.text)
+  const item = await db.create(chatId, data.text)
 
   return {
     statusCode: 200,

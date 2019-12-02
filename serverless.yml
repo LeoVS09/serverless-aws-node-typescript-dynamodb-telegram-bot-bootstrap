@@ -74,12 +74,12 @@ custom:
 
 
 functions:
-  webhook:
-    handler: handler.webhook
+  telegram:
+    handler: handler.telegram
     events:
       - http:
           method: post
-          path: webhook
+          path: telegram
     enviroment:
       STAGE: ${self:provider.stage}
       SECRET_FUNCTION_TOKEN: ${env:SECRET_FUNCTION_TOKEN}
