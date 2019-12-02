@@ -24,7 +24,7 @@ What bot can:
 const helloMessage = `
 Hi!
 There simple Todo X bot,
-Bot fully Open Source, you can find code [here](https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap)
+Bot fully Open Source, you can find code on [github](https://github.com/LeoVS09/serverless-aws-node-typescript-dynamodb-telegram-bot-bootstrap)
 ${helpMessage}
 `
 
