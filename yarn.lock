@@ -3925,7 +3925,7 @@ lsmod@1.0.0:
   resolved "https://registry.yarnpkg.com/lsmod/-/lsmod-1.0.0.tgz#9a00f76dca36eb23fa05350afe1b585d4299e64b"
   integrity sha1-mgD3bco26yP6BTUK/htYXUKZ5ks=
 
-luxon@^1.21.2:
+luxon@^1.21.3:
   version "1.21.3"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.21.3.tgz#f1d5c2a7e855d039836cf4954f883ecac8fc4727"
   integrity sha512-lLRwNcNnkZLuv13A1FUuZRZmTWF7ro2ricYvb0L9cvBYHPvZhQdKwrYnZzi103D2XKmlVmxWpdn2wfIiOt2YEw==
@@ -5326,10 +5326,10 @@ serverless-mocha-plugin@^1.3.6:
     mocha "^6.1.4"
     yaml-edit "^0.1.3"
 
-serverless-offline@^6.0.0-alpha.49:
-  version "6.0.0-alpha.49"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.0.0-alpha.49.tgz#fdf2e276e24db43719f8d955528642266381fd16"
-  integrity sha512-/4gM58cre66zb1XZbNrVKzTlKoHn+u2242WQm/36MjAY0EsNUk+A2G3Qxrje9qhOStB0q0KJLOF27yCMCNTRYw==
+serverless-offline@^6.0.0-alpha.51:
+  version "6.0.0-alpha.51"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.0.0-alpha.51.tgz#4b08e5dd3462412ba767d05066e23d8fc6188fe5"
+  integrity sha512-QlQRZ77u3twyHpxoiCJOU1nHt4+GMvjku1/PP4rP2VfxRTzRx2ceWyBiGwlsMSVH6bn2YcrpoMh1TYcnpsgvcg==
   dependencies:
     "@hapi/boom" "^7.4.11"
     "@hapi/h2o2" "^8.3.2"
@@ -5343,7 +5343,7 @@ serverless-offline@^6.0.0-alpha.49:
     js-string-escape "^1.0.1"
     jsonpath-plus "^2.0.0"
     jsonwebtoken "^8.5.1"
-    luxon "^1.21.2"
+    luxon "^1.21.3"
     node-fetch "^2.6.0"
     node-schedule "^1.3.2"
     object.fromentries "^2.0.1"
