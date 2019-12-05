@@ -251,7 +251,7 @@
     "@hapi/hoek" "8.x.x"
     "@hapi/topo" "3.x.x"
 
-"@hapi/joi@16.x.x", "@hapi/joi@^16.1.7":
+"@hapi/joi@16.x.x", "@hapi/joi@^16.1.8":
   version "16.1.8"
   resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-16.1.8.tgz#84c1f126269489871ad4e2decc786e0adef06839"
   integrity sha512-wAsVvTPe+FwSrsAurNt5vkg3zo+TblvC5Bb1zMVK6SJzZqw9UrJnexxR+76cpePmtUZKHAPxcQ2Bf7oVHyahhg==
@@ -2923,7 +2923,7 @@ growl@1.10.5:
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.5.tgz#f2735dc2283674fa67478b10181059355c369e5e"
   integrity sha512-qBr4OuELkhPenW6goKVXiv47US3clb3/IbuWF9KNKEijAy9oeHxU9IgzjvJhHkUzhaj7rOUD7+YGWqUjLp5oSA==
 
-handlebars@^4.5.1:
+handlebars@^4.5.3:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
   integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
@@ -2934,15 +2934,15 @@ handlebars@^4.5.1:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-hapi-swagger@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/hapi-swagger/-/hapi-swagger-11.0.1.tgz#8ced6d4896f13ccb110cbd240bbb7a0dac3b2ad1"
-  integrity sha512-jn8LyAUsqbQy+L+AtqODFIOqI9rdQHnVfR9ejx3flBZg4kQF7gLW54Ws00lYDsJw+gTLYLYgV1obPsudOmoLuQ==
+hapi-swagger@^11.0.2:
+  version "11.0.2"
+  resolved "https://registry.yarnpkg.com/hapi-swagger/-/hapi-swagger-11.0.2.tgz#4b60f66bf1f74f2126d97842cbf2fc781a21b55f"
+  integrity sha512-NJd43dvdpCgdBztc9khIXreucmuEeGcJkD5ZarKk4Dgq56WbqDA0foauJ6jKe9RXLnoT0OJQJzbB3Kb3z43h7g==
   dependencies:
     "@hapi/boom" "^8.0.1"
     "@hapi/hoek" "^8.2.4"
-    "@hapi/joi" "^16.1.7"
-    handlebars "^4.5.1"
+    "@hapi/joi" "^16.1.8"
+    handlebars "^4.5.3"
     http-status "^1.0.1"
     json-schema-ref-parser "^6.1.0"
     swagger-parser "4.0.2"
@@ -3930,7 +3930,7 @@ lsmod@1.0.0:
   resolved "https://registry.yarnpkg.com/lsmod/-/lsmod-1.0.0.tgz#9a00f76dca36eb23fa05350afe1b585d4299e64b"
   integrity sha1-mgD3bco26yP6BTUK/htYXUKZ5ks=
 
-luxon@^1.21.2:
+luxon@^1.21.3:
   version "1.21.3"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-1.21.3.tgz#f1d5c2a7e855d039836cf4954f883ecac8fc4727"
   integrity sha512-lLRwNcNnkZLuv13A1FUuZRZmTWF7ro2ricYvb0L9cvBYHPvZhQdKwrYnZzi103D2XKmlVmxWpdn2wfIiOt2YEw==
@@ -5341,10 +5341,10 @@ serverless-mocha-plugin@^1.3.6:
     mocha "^6.1.4"
     yaml-edit "^0.1.3"
 
-serverless-offline@^6.0.0-alpha.49:
-  version "6.0.0-alpha.49"
-  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.0.0-alpha.49.tgz#fdf2e276e24db43719f8d955528642266381fd16"
-  integrity sha512-/4gM58cre66zb1XZbNrVKzTlKoHn+u2242WQm/36MjAY0EsNUk+A2G3Qxrje9qhOStB0q0KJLOF27yCMCNTRYw==
+serverless-offline@^6.0.0-alpha.52:
+  version "6.0.0-alpha.52"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.0.0-alpha.52.tgz#4910fc11c78d4c2df36dac9684fc8b5118b7b44a"
+  integrity sha512-tLAwTRz7yfhtOidIkmfbID8+ujYBegxNSjwCUjsbV/iAzjQ/eKNAinFC5kjX22TgcFHuAi2P/Kdc54eVDlvknQ==
   dependencies:
     "@hapi/boom" "^7.4.11"
     "@hapi/h2o2" "^8.3.2"
@@ -5354,11 +5354,11 @@ serverless-offline@^6.0.0-alpha.49:
     chalk "^3.0.0"
     cuid "^2.1.6"
     execa "^3.4.0"
-    hapi-swagger "^11.0.1"
+    hapi-swagger "^11.0.2"
     js-string-escape "^1.0.1"
     jsonpath-plus "^2.0.0"
     jsonwebtoken "^8.5.1"
-    luxon "^1.21.2"
+    luxon "^1.21.3"
     node-fetch "^2.6.0"
     node-schedule "^1.3.2"
     object.fromentries "^2.0.1"
