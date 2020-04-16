@@ -34,7 +34,7 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.17",
+    "@types/aws-lambda": "^8.10.50",
     "@types/istanbul-lib-coverage": "^2.0.1",
     "@types/node": "^12.12.12",
     "@types/uuid": "^3.4.6",
