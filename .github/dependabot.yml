@@ -1,0 +1,49 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "02:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: telegraf
+    versions:
+    - 3.38.0
+    - 4.0.2
+  - dependency-name: "@types/node"
+    versions:
+    - 14.14.17
+    - 14.14.22
+  - dependency-name: ts-loader
+    versions:
+    - 8.0.13
+    - 8.0.14
+  - dependency-name: "@types/aws-lambda"
+    versions:
+    - 8.10.68
+    - 8.10.71
+  - dependency-name: serverless
+    versions:
+    - 2.17.0
+    - 2.21.1
+  - dependency-name: aws-sdk
+    versions:
+    - 2.820.0
+    - 2.834.0
+  - dependency-name: webpack
+    versions:
+    - 5.11.1
+    - 5.19.0
+  - dependency-name: fork-ts-checker-webpack-plugin
+    versions:
+    - 6.0.8
+  - dependency-name: typescript
+    versions:
+    - 4.1.3
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
+  - dependency-name: handlebars
+    versions:
+    - 4.7.6
